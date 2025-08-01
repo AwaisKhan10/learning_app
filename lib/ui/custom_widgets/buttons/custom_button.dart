@@ -2,41 +2,34 @@
 
 import 'package:app/core/constant/colors.dart';
 import 'package:app/core/constant/text_style.dart';
+import 'package:app/core/model/container_model.dart';
 import 'package:flutter/material.dart';
 
 class CustomButton extends StatelessWidget {
-  String? text;
-  Color? boxColor;
-  Color? textColor;
-  double? borderRadius;
-  String? imgUrl;
+  ContainerModel? containerModel = ContainerModel();
 
-  CustomButton({
-    this.text,
-    this.boxColor,
-    this.textColor,
-    this.borderRadius,
-    this.imgUrl,
-  });
+  CustomButton({this.containerModel});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       alignment: Alignment.center,
-      width: double.infinity,
+      width: 200,
       margin: EdgeInsets.all(16),
-      height: 54,
+
       decoration: BoxDecoration(
         image: DecorationImage(
-          image: NetworkImage(imgUrl ?? ""),
+          image: NetworkImage(containerModel!.imgUrl ?? ""),
           fit: BoxFit.cover,
         ),
-        color: boxColor ?? blackColor,
-        borderRadius: BorderRadius.circular(borderRadius ?? 16),
+        color: containerModel!.boxColor ?? blackColor,
+        borderRadius: BorderRadius.circular(containerModel!.borderRadius ?? 16),
       ),
       child: Text(
-        text ?? "",
-        style: style16B.copyWith(color: textColor ?? whiteColor),
+        containerModel!.text ?? "",
+        style: style16B.copyWith(
+          color: containerModel!.textColor ?? whiteColor,
+        ),
       ),
     );
   }

@@ -1,4 +1,5 @@
 import 'package:app/ui/screens/basic_screen.dart';
+import 'package:app/ui/screens/vacancy_screen.dart';
 import 'package:flutter/material.dart';
 
 void main() {
@@ -16,7 +17,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: BasicScreen(),
+      home: VacancyScreen(),
     );
   }
 }

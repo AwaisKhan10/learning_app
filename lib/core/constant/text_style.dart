@@ -2,7 +2,6 @@
 
 import 'package:app/core/constant/colors.dart';
 import 'package:flutter/widgets.dart';
-import 'package:google_fonts/google_fonts.dart';
 
 /**************************** Normal Style ******************************/
 

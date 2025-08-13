@@ -1,10 +1,26 @@
 // ignore_for_file: use_key_in_widget_constructors, deprecated_member_use
 
+import 'package:app/core/constant/auth_field_decoration.dart';
 import 'package:app/core/constant/colors.dart';
 import 'package:app/core/constant/text_style.dart';
+import 'package:app/ui/custom_widgets/buttons/custom_button.dart';
+import 'package:app/ui/home_screen.dart';
 import 'package:flutter/material.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  bool isSelect = false;
+
+  onClick() {
+    setState(() {
+      isSelect = !isSelect;
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,6 +69,9 @@ class LoginScreen extends StatelessWidget {
             ),
             SizedBox(height: 30),
 
+            ///
+            /// User Name Field
+            ///
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0),
               child: Text(
@@ -64,43 +83,18 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(5),
+              decoration: authFieldDecoration.copyWith(
+                hintText: "Username",
                 prefixIcon: Image.asset(
                   "assets/icons_assets/user_name.png",
                   scale: 3,
                 ),
-
-                hintText: "Email",
-                // helperText: "Email",
-                // labelText: "Email",
-
-                ///
-                /// Boder AREA
-                ///
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
               ),
             ),
 
+            ///
+            /// Password Field
+            ///
             Padding(
               padding: const EdgeInsets.only(bottom: 8.0, top: 30),
               child: Text(
@@ -112,35 +106,41 @@ class LoginScreen extends StatelessWidget {
               ),
             ),
             TextFormField(
-              decoration: InputDecoration(
-                contentPadding: EdgeInsets.all(5),
-                suffixIcon: Icon(Icons.visibility_off),
+              obscureText: isSelect ? false : true,
+              decoration: authFieldDecoration.copyWith(
                 hintText: "Password",
-                // helperText: "Password",
-                // labelText: "Password",
+                suffixIcon: GestureDetector(
+                  onTap: () {
+                    onClick();
+                  },
+                  child: isSelect
+                      ? Icon(Icons.visibility)
+                      : Icon(Icons.visibility_off),
+                ),
+                prefixIcon: Icon(Icons.key_outlined),
+              ),
+            ),
+            SizedBox(height: 20),
 
-                ///
-                /// Boder AREA
-                ///
-                border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                errorBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                focusedBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                enabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
-                ),
-                disabledBorder: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(8),
-                  borderSide: BorderSide(width: 1, color: borderColor),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (context) => HomeScreen()),
+                );
+              },
+              child: Text("Login"),
+            ),
+            Center(
+              child: RichText(
+                text: TextSpan(
+                  children: [
+                    TextSpan(text: "Donot Have an account?", style: style16B),
+                    TextSpan(
+                      text: "Login",
+                      style: style16B.copyWith(color: blueColor),
+                    ),
+                  ],
                 ),
               ),
             ),

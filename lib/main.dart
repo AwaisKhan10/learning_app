@@ -1,5 +1,5 @@
-import 'package:app/ui/home_screen.dart';
-import 'package:app/ui/screens/auth/login_screen.dart';
+import 'package:app/ui/screens/discount_screen.dart';
+
 import 'package:flutter/material.dart';
 
 void main() {
@@ -13,11 +13,12 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'Flutter Demo',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
       ),
-      home: HomeScreen(),
+      home: DiscountScreen(),
     );
   }
 }
